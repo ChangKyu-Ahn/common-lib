@@ -15,7 +15,6 @@ import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.validation.FieldError;
-import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -87,8 +86,6 @@ public class CommonExceptionHandler extends ResponseEntityExceptionHandler {
       errorFieldList.addAll(convertedErrorFieldList);
     } else if (e instanceof HttpMessageNotReadableException) {
       errorField = getErrorField("Request Body", "Request Body is empty");
-    } else if (e instanceof HttpRequestMethodNotSupportedException) {
-      errorField = getErrorField("Method Not Supported", e.getMessage());
     }
 
     if (ObjectUtils.isNotEmpty(errorField)) {

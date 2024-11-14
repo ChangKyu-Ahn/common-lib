@@ -8,6 +8,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
+import org.springframework.security.crypto.factory.PasswordEncoderFactories;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
 @Import(CommonExceptionHandler.class)
@@ -18,5 +20,9 @@ public class CommonConfigurer {
       .json()
       .modules(new JavaTimeModule(), new BlackbirdModule())
       .build();
+  }
+
+  public static PasswordEncoder customPasswordEncoder() {
+    return PasswordEncoderFactories.createDelegatingPasswordEncoder();
   }
 }

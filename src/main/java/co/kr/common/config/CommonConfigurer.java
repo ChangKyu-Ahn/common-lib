@@ -1,13 +1,16 @@
 package co.kr.common.config;
 
+import co.kr.common.handler.CommonExceptionHandler;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.fasterxml.jackson.module.blackbird.BlackbirdModule;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
 import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
 
 @Configuration
+@Import(CommonExceptionHandler.class)
 public class CommonConfigurer {
   @Bean
   public static ObjectMapper customObjectMapper() {

@@ -1,6 +1,7 @@
 package co.kr.common.specification;
 
 import co.kr.common.specification.shared.Specification;
+import co.kr.common.util.SecurityUtil;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
 
@@ -11,6 +12,10 @@ public class DataOwnerSpec extends Specification<String> {
 
 	@Override
 	protected boolean check(String target) {
+		if (SecurityUtil.isAdmin()) {
+			return true;
+		}
+
 		return StringUtils.isNoneBlank(target, checkTargetUserId) && StringUtils.equals(target, checkTargetUserId);
 	}
 

@@ -4,6 +4,7 @@ import static co.kr.common.config.CommonConfigurer.customPasswordEncoder;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
+import lombok.NonNull;
 import lombok.Value;
 import org.apache.commons.lang3.ObjectUtils;
 
@@ -17,6 +18,10 @@ public class Password {
 			return null;
 		}
 
-		return new Password(customPasswordEncoder().encode(value));
+		return new Password(value);
  	}
+
+	 public static Password newInstanceWithEncrypted(@NonNull String value) {
+		return newInstance(customPasswordEncoder().encode(value));
+	 }
 }

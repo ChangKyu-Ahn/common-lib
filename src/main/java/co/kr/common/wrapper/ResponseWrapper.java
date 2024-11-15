@@ -2,7 +2,6 @@ package co.kr.common.wrapper;
 
 import co.kr.common.dto.ResponseDto;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import java.util.Objects;
 import java.util.Optional;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
@@ -10,7 +9,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.MethodParameter;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.server.ServerHttpRequest;
 import org.springframework.http.server.ServerHttpResponse;
@@ -55,22 +53,18 @@ public class ResponseWrapper implements ResponseBodyAdvice<Object> {
 	}
 
 	private Object getEnvelopedResponseEntity(Object responseBody, HttpStatus responseStatus) {
-		if (isResponseEntity(responseBody)) {
+		if (isResponseDto(responseBody)) {
 			return responseBody;
 		}
 
 		return getResponseDto(responseBody, responseStatus);
 	}
 
-	private boolean isResponseEntity(Object responseBody) {
-		return responseBody instanceof ResponseEntity;
+	private boolean isResponseDto(Object responseBody) {
+		return responseBody instanceof ResponseDto;
 	}
 
 	private Object getResponseDto(Object responseBody, HttpStatus responseStatus) {
-		if (Objects.isNull(responseBody)) {
-			return null;
-		}
-
 		ResponseDto<Object> responseDto = ResponseDto.builder()
 			.code(responseStatus.value())
 			.response(responseBody)

@@ -20,7 +20,7 @@ public class SecurityUtil {
 		Authentication authentication = getAuthentication();
 
 		return authentication.getAuthorities().stream()
-			.anyMatch(grantedAuthority -> grantedAuthority.getAuthority().equals(UserType.SYS_ADMIN.getCode()));
+			.anyMatch(grantedAuthority -> grantedAuthority.getAuthority().equals("ROLE_" + UserType.SYS_ADMIN.getCode()));
 	}
 
 	private static Authentication getAuthentication() {

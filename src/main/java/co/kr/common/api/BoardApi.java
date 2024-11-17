@@ -16,11 +16,8 @@ public class BoardApi {
 
 	@Async
 	public void deleteAllByUserId(String userId) {
-		try {
-			String path = SecurityUtil.isAdmin() ? String.format("/boards/user/%s", userId) : "/v1/boards/user" ;
-			internalClient.post(path, null, null);
-		} catch (Exception e) {
-			log.error("#### 사용자 게시글 삭제 오류 : {}", e.getMessage(), e);
-		}
+		String path = SecurityUtil.isAdmin() ? String.format("/boards/user/%s", userId) : "/v1/boards/user" ;
+
+		internalClient.post(path, null, null);
 	}
 }

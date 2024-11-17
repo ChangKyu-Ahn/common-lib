@@ -45,7 +45,7 @@ public class JWTRequestFilter extends OncePerRequestFilter {
     @Override
     protected boolean shouldNotFilter(HttpServletRequest request) {
         if (ObjectUtils.isEmpty(EXCLUDE_URL)) {
-            return true;
+            return false;
         }
 
         AntPathMatcher pathMatcher = new AntPathMatcher();

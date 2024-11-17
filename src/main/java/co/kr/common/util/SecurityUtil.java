@@ -17,10 +17,15 @@ public class SecurityUtil {
 	}
 
 	public static boolean isAdmin() {
-		Authentication authentication = getAuthentication();
+		try {
+			Authentication authentication = getAuthentication();
 
-		return authentication.getAuthorities().stream()
-			.anyMatch(grantedAuthority -> grantedAuthority.getAuthority().equals("ROLE_" + UserType.SYS_ADMIN.getCode()));
+			return authentication.getAuthorities().stream()
+				.anyMatch(grantedAuthority -> grantedAuthority.getAuthority().equals("ROLE_" + UserType.SYS_ADMIN.getCode()));
+		} catch (Exception e) {
+			return false;
+		}
+
 	}
 
 	private static Authentication getAuthentication() {

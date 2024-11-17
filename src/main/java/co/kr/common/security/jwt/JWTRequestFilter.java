@@ -14,7 +14,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.http.HttpHeaders;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.util.AntPathMatcher;
 import org.springframework.web.filter.OncePerRequestFilter;
@@ -61,10 +60,6 @@ public class JWTRequestFilter extends OncePerRequestFilter {
 			usernamePasswordAuthenticationToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
 
 			SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);
-		} catch (UsernameNotFoundException usernameNotFoundException) {
-			log.error("No Customer Account Found!! Customer ID : [{}] Exception Detail : ",
-					jwtUserDetailDto.getUserId(), usernameNotFoundException);
-			throw usernameNotFoundException;
 		} catch (Exception e) {
 			log.error("Unexpected Exception : ", e);
 			throw e;

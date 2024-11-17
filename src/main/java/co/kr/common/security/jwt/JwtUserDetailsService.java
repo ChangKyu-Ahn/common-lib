@@ -26,12 +26,12 @@ public class JwtUserDetailsService implements UserDetailsService {
   }
 
   public UserDetails loadUserByUsername(JwtUserDetailDto jwtUserDetailDto) throws UsernameNotFoundException {
-    setJwtUserDetailResponseThreadLocal(jwtUserDetailDto);
+    setJwtUserDetailDto(jwtUserDetailDto);
 
     return loadUserByUsername(jwtUserDetailDto.getUserId());
   }
 
-  private void setJwtUserDetailResponseThreadLocal(JwtUserDetailDto jwtUserDetailDto) {
+  private void setJwtUserDetailDto(JwtUserDetailDto jwtUserDetailDto) {
     this.jwtUserDetailDto = jwtUserDetailDto;
   }
 }

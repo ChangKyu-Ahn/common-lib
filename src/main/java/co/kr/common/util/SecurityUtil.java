@@ -2,7 +2,7 @@ package co.kr.common.util;
 
 import co.kr.common.code.UserType;
 import co.kr.common.exception.InvalidTokenException;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import co.kr.common.security.jwt.JwtAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
@@ -26,7 +26,7 @@ public class SecurityUtil {
 	private static Authentication getAuthentication() {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
-		if (!(authentication instanceof UsernamePasswordAuthenticationToken)) {
+		if (!(authentication instanceof JwtAuthenticationToken)) {
 			throw new InvalidTokenException("알 수 없는 인증 정보");
 		}
 
